@@ -36,7 +36,7 @@ public class AddressBookEncoder {
         encodedPersonBuilder.append("e/").append(person.getEmail().value);
 
         encodedPersonBuilder.append(person.getAddress().isPrivate() ? " p" : " ");
-        encodedPersonBuilder.append("a/").append(person.getAddress().value);
+        encodedPersonBuilder.append("a/").append(person.getAddress().toString());
 
         person.getTags().forEach(tag -> encodedPersonBuilder.append(" t/").append(tag.tagName));
 
