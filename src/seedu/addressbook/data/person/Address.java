@@ -8,20 +8,19 @@ import java.util.Objects;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address extends Contact{
 
-    public static final String EXAMPLE = "23, Clementi Ave 3, #12-34, 231534";
+    public static final String EXAMPLE = "123, Clementi Ave 3, #12-34, 231534";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be of the following format:"
             + " a/BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
-    // public final String value;
-    private boolean isPrivate;
 
     private Block block;
     private Street street;
     private Unit unit;
     private PostalCode postalCode;
+
+    public final String value;
 
     /**
      * Validates given address.
@@ -29,8 +28,9 @@ public class Address {
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
+        super(isPrivate);
+        value = address;
         String trimmedAddress = address.trim();
-        this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
@@ -54,28 +54,18 @@ public class Address {
 
     @Override
     public String toString() {
-        return block.getValue() + ", "
-                + street.getValue() + ", "
-                + unit.getValue() + ", "
-                + postalCode.getValue();
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.block.getValue().equals(((Address) other).block.getValue())
-                && this.street.getValue().equals(((Address) other).street.getValue())
-                && this.unit.getValue().equals(((Address) other).unit.getValue())
-                && this.postalCode.getValue().equals(((Address) other).postalCode.getValue())); // state check
+                && this.value.equals(((Address) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(block, street, unit, postalCode);
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
+        return value.hashCode();
     }
 }
