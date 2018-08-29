@@ -94,6 +94,10 @@ public class TextUi {
         formatter.showInitFailedMessage();
     }
 
+    public void showOperationFailedMessage() {
+        formatter.showOperationFailedMessage();
+    }
+
     /**
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.

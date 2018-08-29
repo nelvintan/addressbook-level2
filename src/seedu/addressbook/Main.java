@@ -56,8 +56,10 @@ public class Main {
             this.storage = initializeStorage(launchArgs);
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
-
-        } catch (InvalidStorageFilePathException | StorageOperationException e) {
+        } catch (StorageOperationException e) {
+            ui.showOperationFailedMessage();
+            throw new RuntimeException(e);
+        } catch (InvalidStorageFilePathException e) {
             ui.showInitFailedMessage();
             /*
              * ==============NOTE TO STUDENTS=========================================================================

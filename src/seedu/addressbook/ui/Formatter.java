@@ -63,6 +63,10 @@ public class Formatter {
         showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
+    public void showOperationFailedMessage() {
+        showToUser(MESSAGE_OPERATION_FAILED, DIVIDER, DIVIDER);
+    }
+
     /**
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
