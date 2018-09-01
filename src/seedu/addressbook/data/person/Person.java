@@ -12,6 +12,8 @@ import seedu.addressbook.data.tag.Tag;
  */
 public class Person implements ReadOnlyPerson {
 
+    private int sequenceNumber;
+    private static int nextSequenceNumber = 1;
     private Name name;
     private Phone phone;
     private Email email;
@@ -28,6 +30,8 @@ public class Person implements ReadOnlyPerson {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        sequenceNumber = Person.nextSequenceNumber;
+        Person.nextSequenceNumber = Person.nextSequenceNumber + 1;
     }
 
     /**
